@@ -1,3 +1,4 @@
+import {Request, Response} from "express";
 import User from "../schemas/User";
 import {
   compareHashPassword,
@@ -37,6 +38,14 @@ export async function loginUser(payload: LoginUserType) {
   if (!(await compareHashPassword(payload.password, user.password)))
     throw new Error("Passwords don't match");
 
-    // return something
+  // return something
   console.log(user);
 }
+
+
+// export const getLogin = (req: Request, res: Response) => {
+//   if (req.isAuthenticated()) {
+//     return res.redirect("/");
+//   }
+//   res.redirect("/login");
+// }
