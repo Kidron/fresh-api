@@ -7,6 +7,7 @@ import {
 } from "../utils/utils";
 
 interface CreateUserType {
+  fullName: string;
   email: string;
   password: string;
 }
@@ -15,6 +16,7 @@ export async function createUser(payload: CreateUserType) {
   await isValidPassword(payload.password);
   const hash = await hashPassword(payload.password);
   await User.create({
+    fullName: payload.fullName,
     email: payload.email,
     password: hash,
   });
