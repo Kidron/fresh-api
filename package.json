@@ -4,7 +4,9 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "dev": "nodemon --legacy-watch ./src/server.ts"
+        "dev": "nodemon --legacy-watch ./src/server.ts",
+        "build": "tsc -p tsconfig.json",
+        "start": "node dist/index.js",
     },
     "author": "",
     "license": "ISC",
