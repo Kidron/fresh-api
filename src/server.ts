@@ -9,11 +9,9 @@ dotenv.config();
 
 const app = express();
 const router = express.Router();
-// const MongoStore = connectMongo(session);
 
 import { connectDB } from "./database";
-// import User from "./schemas/User";
-import { createUser } from "./controllers/users";
+import { createUser, logout } from "./controllers/users";
 
 // import passport strategy
 import "./utils/passport";
@@ -56,7 +54,7 @@ app.use(express.json());
 app.use("/api/v1", router);
 
 app.get("/", isAuthenticated, (req: IRequest, res: Response) => {
-  console.log(req.user);
+  // console.log(req.user);
 
   res.render("index.ejs", { name: req.user.fullName });
 });
@@ -67,6 +65,7 @@ app.get("/login", (req: Request, res: Response) => {
   }
   res.render("login.ejs");
 });
+router.post("/logout", logout);
 
 app.get("/register", (req: Request, res: Response) => {
   res.render("register.ejs");
@@ -84,7 +83,7 @@ router.post("/register", async (req: Request, res: Response) => {
       password,
     });
     // res.sendStatus(200);
-    res.redirect(200, "/login");
+    res.redirect("/login");
   } catch (err: any) {
     console.log(err);
     // res.status(500).send(err.message);

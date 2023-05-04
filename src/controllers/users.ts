@@ -1,4 +1,4 @@
-import {Request, Response} from "express";
+import {NextFunction, Request, Response} from "express";
 import User from "../schemas/User";
 import {
   compareHashPassword,
@@ -49,3 +49,10 @@ export async function loginUser(payload: LoginUserType) {
 //   }
 //   res.redirect("/login");
 // }
+
+export const logout = (req: Request, res: Response, next: NextFunction): void => {
+  req.logout(() => {
+    console.log("Logged out");
+  });
+  res.redirect("/login");
+};
