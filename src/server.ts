@@ -9,6 +9,7 @@ dotenv.config();
 
 const app = express();
 const router = express.Router();
+const port = process.env.PORT || 3000
 
 import { connectDB } from "./database";
 import { createUser, logout } from "./controllers/users";
@@ -23,7 +24,7 @@ interface IRequest extends Request {
 
 connectDB()
   .then(() => {
-    app.listen(3000, () =>
+    app.listen(port, () =>
       console.log("server started visit http://localhost:3000")
     );
   })
