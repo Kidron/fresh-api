@@ -25,7 +25,7 @@ interface IRequest extends Request {
 connectDB()
   .then(() => {
     app.listen(port, () =>
-      console.log("server started visit http://localhost:3000")
+      console.log(`server started visit http://localhost:${port}`)
     );
   })
   .catch((err) => console.error(err));
@@ -57,19 +57,19 @@ app.use("/api/v1", router);
 app.get("/", isAuthenticated, (req: IRequest, res: Response) => {
   // console.log(req.user);
 
-  res.render("index.ejs", { name: req.user.fullName });
+  res.render("index", { name: req.user.fullName });
 });
 
 app.get("/login", (req: Request, res: Response) => {
   if (req.user) {
     return res.redirect("/");
   }
-  res.render("login.ejs");
+  res.render("login");
 });
 router.post("/logout", logout);
 
 app.get("/register", (req: Request, res: Response) => {
-  res.render("register.ejs");
+  res.render("register");
 });
 
 router.post("/register", async (req: Request, res: Response) => {
