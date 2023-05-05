@@ -22,6 +22,11 @@ export async function createUser(payload: CreateUserType) {
     password: hash,
   });
 }
+// export async function createUser(payload: CreateUserType) {
+//   const emailError = await isValidEmail(payload.email);
+//   if(emailError) return emailError;
+// }
+
 
 interface LoginUserType {
   email: string;

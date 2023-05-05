@@ -1,5 +1,10 @@
 <h1>Register</h1>
-<form action="/api/v1/register" method="POST">
+<% if (error) { %>
+    <div>
+      <%= error %>
+    </div>
+  <% } %>
+<form action="register" method="POST">
     <div>
         <label for="name">Name</label>
         <input type="text" id="name" name="fullName" required>

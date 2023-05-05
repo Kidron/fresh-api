@@ -17,6 +17,7 @@ import { createUser, logout } from "./controllers/users";
 // import passport strategy
 import "./utils/passport";
 import { isAuthenticated } from "./utils/passport";
+import { isValidPassword } from "./utils/utils";
 
 interface IRequest extends Request {
   user?: any;
@@ -69,22 +70,26 @@ app.get("/login", (req: Request, res: Response) => {
 router.post("/logout", logout);
 
 app.get("/register", (req: Request, res: Response) => {
-  res.render("register");
+  res.render("register", { error: null });
 });
 
-router.post("/register", async (req: Request, res: Response) => {
+app.post("/register", async (req: Request, res: Response) => {
   try {
     const { fullName, email, password } = req.body;
     if (!fullName) throw new Error("Missing name");
     if (!email) throw new Error("Invalid email");
-    if (!password) throw new Error("Invalid password");
-    await createUser({
-      fullName,
-      email,
-      password,
-    });
-    // res.sendStatus(200);
-    res.redirect("/login");
+    try {
+      await isValidPassword(password);
+      await createUser({
+       fullName,
+       email,
+       password,
+     });
+     res.redirect("/login");
+    } catch (error: any) {
+      res.render('register', { error: error.message });
+    }
+
   } catch (err: any) {
     console.log(err);
     // res.status(500).send(err.message);
