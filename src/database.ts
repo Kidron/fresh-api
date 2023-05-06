@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
+import { Config } from './types/config';
 
 
 export async function connectDB() {
-    if (!process.env.DB_STRING) throw new Error("Connection string undefined");
-    return await mongoose.connect(process.env.DB_STRING);
+    return await mongoose.connect(Config.DB_STRING);
 }

@@ -1,4 +1,4 @@
-import {NextFunction, Request, Response} from "express";
+import { NextFunction, Request, Response } from "express";
 import User from "../schemas/User";
 import {
   compareHashPassword,
@@ -22,11 +22,6 @@ export async function createUser(payload: CreateUserType) {
     password: hash,
   });
 }
-// export async function createUser(payload: CreateUserType) {
-//   const emailError = await isValidEmail(payload.email);
-//   if(emailError) return emailError;
-// }
-
 
 interface LoginUserType {
   email: string;
@@ -47,15 +42,11 @@ export async function loginUser(payload: LoginUserType) {
   console.log(user);
 }
 
-
-// export const getLogin = (req: Request, res: Response) => {
-//   if (req.isAuthenticated()) {
-//     return res.redirect("/");
-//   }
-//   res.redirect("/login");
-// }
-
-export const logout = (req: Request, res: Response, next: NextFunction): void => {
+export const logout = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): void => {
   req.logout(() => {
     console.log("Logged out");
   });
