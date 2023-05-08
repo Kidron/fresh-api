@@ -25,7 +25,7 @@
       email: e.target[1].value,
       password: e.target[2].value,
     };
-    const result = await fetch("http://localhost:3000/api/v1/register", {
+    const result = await fetch("/api/v1/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
